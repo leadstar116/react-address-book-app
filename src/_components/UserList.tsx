@@ -14,13 +14,25 @@ type Props = {
 }
 const UserList = (props: Props) => {
     const [isLoaded, setIsLoaded] = useState(false)
+    const usersCount = 50
 
     useEffect(() => {
         if(isLoaded)
             return;
-        props.callLoadUsers(50)
+        props.callLoadUsers(usersCount)
         setIsLoaded(true)
-    }, [props, isLoaded])
+    }, [props, isLoaded, usersCount])
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const handleScroll = () => {
+        if ((window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight)
+            return
+        props.callLoadUsers(usersCount)
+    }
 
     return (
         <div className="p-2">
