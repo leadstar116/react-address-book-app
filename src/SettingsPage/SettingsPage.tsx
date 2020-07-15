@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../_components/Header'
 
-function HomePage() {
+function SettingsPage() {
     return (
         <div>
             <Header />
@@ -9,4 +9,4 @@ function HomePage() {
     )
 }
 
-export default HomePage
+export default SettingsPage
