@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { loadUsersSuccessfully } from '../_actions/users.actions';
-import { alertClear, alertLoading } from '../_actions/alert.actions';
+import { alertClear, alertFailure, alertLoading } from '../_actions/alert.actions';
 
 type MyRootState = {};
 type MyExtraArg = undefined;
@@ -17,6 +17,6 @@ export const loadUsers = (userCount = 50) => async (dispatch: MyThunkDispatch) =
         dispatch(loadUsersSuccessfully(result.results))
         dispatch(alertClear())
     } catch(e) {
-
+        dispatch(alertFailure(e))
     }
 }
