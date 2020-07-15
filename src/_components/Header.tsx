@@ -7,9 +7,9 @@ const Header = () => {
             <Navbar.Brand href="#home">Address Book</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/settings">Settings</Nav.Link>
+                <Nav className="mr-auto" defaultActiveKey="/">
+                    <Nav.Link eventKey="/">Home</Nav.Link>
+                    <Nav.Link eventKey="/settings">Settings</Nav.Link>
                 </Nav>
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
