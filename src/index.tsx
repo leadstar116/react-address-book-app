@@ -6,6 +6,8 @@ import { PersistGate } from 'redux-persist/lib/integration/react'
 import App from './App/App'
 import store from './_helpers/store'
 import * as serviceWorker from './serviceWorker'
+import 'bootstrap/dist/js/bootstrap'
+import './_assets/scss/App.scss'
 
 const persistor = persistStore(store);
 
