@@ -5,7 +5,7 @@ export interface UserInfo {
     cell: string,
     dob: BirthData,
     gender: string,
-    locatoin: UserLocation,
+    location: UserLocation,
     nat: String,
     phone: String,
     id: UserId,
