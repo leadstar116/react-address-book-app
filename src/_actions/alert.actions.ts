@@ -1,3 +1,9 @@
+export const ALERT_LOADING = 'ALERT_LOADING'
+export const alertLoading = (message: string) => ({
+    type: ALERT_LOADING,
+    payload: { message }
+})
+
 export const ALERT_SUCCESS = 'ALERT_SUCCESS'
 export const alertSuccess = (message: string) => ({
     type: ALERT_SUCCESS,
