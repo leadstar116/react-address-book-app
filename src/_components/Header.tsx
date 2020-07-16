@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Navbar, Nav, FormControl, InputGroup } from 'react-bootstrap'
 
 type Props = {
+    withSearchBar: boolean,
     searchString: string,
     setSearchString: (name: string) => void
 }
@@ -17,6 +18,7 @@ const Header = (props: Props) => {
                     <Link className="mr-2" to="/">Home</Link>
                     <Link to="/settings">Settings</Link>
                 </Nav>
+                {props.withSearchBar &&
                 <InputGroup className="mr-sm-2 search-input" >
                     <InputGroup.Prepend>
                         <InputGroup.Text className={props.searchString && "border border-danger"}>
@@ -34,6 +36,7 @@ const Header = (props: Props) => {
                         onChange={(e) => props.setSearchString(e.target.value)}
                     />
                 </InputGroup>
+                }
             </Navbar.Collapse>
         </Navbar>
     )

@@ -5,3 +5,9 @@ export const loadUsersSuccessfully = (users: Array<UserInfo>) => ({
     type: LOAD_USERS_SUCCESSFULLY,
     payload: { users }
 })
+
+export const CLEAR_USERS = "CLEAR_USERS"
+export const clearUsers = () => ({
+    type: CLEAR_USERS,
+    payload: { }
+})

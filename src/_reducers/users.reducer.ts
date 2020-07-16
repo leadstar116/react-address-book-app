@@ -1,4 +1,4 @@
-import { LOAD_USERS_SUCCESSFULLY } from "../_actions/users.actions";
+import { LOAD_USERS_SUCCESSFULLY, CLEAR_USERS } from "../_actions/users.actions";
 import { UserInfo } from "../_constants/users.interface"
 
 const usersState = {
@@ -20,6 +20,11 @@ const usersReducer = (state = usersState, action: any) => {
                         }
                     }))
                 )
+            }
+        case CLEAR_USERS:
+            return {
+                ...state,
+                users: []
             }
         default:
             break;

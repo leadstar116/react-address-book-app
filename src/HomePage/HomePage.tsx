@@ -8,6 +8,7 @@ function HomePage() {
     return (
         <div>
             <Header
+                withSearchBar = {true}
                 searchString = {searchString}
                 setSearchString = {setSearchString}
             />

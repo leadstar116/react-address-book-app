@@ -6,12 +6,14 @@ import { loadUsers } from '../_helpers/user.thunk'
 import { UserInfo } from '../_constants/users.interface'
 import User from './User'
 import { AlertData } from '../_constants/alert.interface'
+import { LocationSettings } from '../_constants/settings.interface'
 
 type Props = {
     searchString: string,
     userList: UserData,
     alertState: AlertData,
-    callLoadUsers: (userCount: number) => {}
+    settings: settingsState,
+    callLoadUsers: (userCount: number, nationality: string) => {}
 }
 const UserList = (props: Props) => {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -22,7 +24,7 @@ const UserList = (props: Props) => {
     useEffect(() => {
         if(isLoaded || props.userList.users.length)
             return
-        props.callLoadUsers(usersCount)
+        props.callLoadUsers(usersCount, props.settings.location.nationality)
         setIsLoaded(true)
     }, [props, isLoaded, usersCount])
 
@@ -30,7 +32,7 @@ const UserList = (props: Props) => {
     useEffect(() => {
         if(!isFetching || props.searchString)
             return
-        props.callLoadUsers(usersCount)
+        props.callLoadUsers(usersCount, props.settings.location.nationality)
         setIsFetching(false)
     }, [props, isFetching, usersCount])
 
@@ -80,19 +82,23 @@ const UserList = (props: Props) => {
 
 interface UserData {
     users: UserInfo[]
-    alertState: AlertData
+}
+interface settingsState {
+    location: LocationSettings
 }
 
 const mapStateToProps = (state: {
         usersReducer: UserData,
-        alertReducer: AlertData
+        alertReducer: AlertData,
+        settingsReducer: settingsState,
     }) => ({
     userList: state.usersReducer,
+    settings: state.settingsReducer,
     alertState: state.alertReducer
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-    callLoadUsers: (userCount = 50) => dispatch(loadUsers(userCount)),
+    callLoadUsers: (userCount = 50, nationality="") => dispatch(loadUsers(userCount, nationality)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList)

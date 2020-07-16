@@ -7,11 +7,11 @@ type MyRootState = {};
 type MyExtraArg = undefined;
 type MyThunkDispatch = ThunkDispatch<MyRootState, MyExtraArg, Action>;
 
-export const loadUsers = (userCount = 50) => async (dispatch: MyThunkDispatch) => {
+export const loadUsers = (userCount = 50, nationality = "") => async (dispatch: MyThunkDispatch) => {
     try {
         dispatch(alertLoading('Loading...'))
 
-        let response = await fetch(`https://randomuser.me/api/?results=${userCount}`)
+        let response = await fetch(`https://randomuser.me/api/?results=${userCount}&nat=${nationality}`)
         const result = await response.json()
 
         dispatch(loadUsersSuccessfully(result.results))
