@@ -13,7 +13,13 @@ const usersReducer = (state = usersState, action: any) => {
         case LOAD_USERS_SUCCESSFULLY:
             return {
                 ...state,
-                preloadedUsers: payload.users,
+                preloadedUsers: payload.users.map((user: UserInfo) => ({
+                    ...user,
+                    name: {
+                        ...user.name,
+                        username: user.login.username
+                    }
+                })),
                 isPreloaded: true
             }
         case UPDATE_USERS_WITH_PRELOADED_USERS:
