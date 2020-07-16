@@ -1,8 +1,10 @@
-import { LOAD_USERS_SUCCESSFULLY, CLEAR_USERS } from "../_actions/users.actions";
+import { LOAD_USERS_SUCCESSFULLY, CLEAR_USERS, UPDATE_USERS_WITH_PRELOADED_USERS, UPDATE_PRELOADED_FLAG } from "../_actions/users.actions";
 import { UserInfo } from "../_constants/users.interface"
 
 const usersState = {
-    users: [] as UserInfo[]
+    users: [] as UserInfo[],
+    preloadedUsers: [] as UserInfo[],
+    isPreloaded: false
 }
 const usersReducer = (state = usersState, action: any) => {
     const {type, payload} = action
@@ -11,15 +13,20 @@ const usersReducer = (state = usersState, action: any) => {
         case LOAD_USERS_SUCCESSFULLY:
             return {
                 ...state,
-                users: state.users.concat(
-                    payload.users.map((user: UserInfo) => ({
-                        ...user,
-                        name: {
-                            ...user.name,
-                            username: user.login.username
-                        }
-                    }))
-                )
+                preloadedUsers: payload.users,
+                isPreloaded: true
+            }
+        case UPDATE_USERS_WITH_PRELOADED_USERS:
+            return {
+                ...state,
+                users: state.users.concat(state.preloadedUsers),
+                preloadedUsers: [],
+                isPreloaded: false,
+            }
+        case UPDATE_PRELOADED_FLAG:
+            return {
+                ...state,
+                isPreloaded: payload
             }
         case CLEAR_USERS:
             return {

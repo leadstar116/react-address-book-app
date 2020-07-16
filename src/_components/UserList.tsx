@@ -2,38 +2,60 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { loadUsers } from '../_helpers/user.thunk'
+import { loadUsers, updateUsers } from '../_helpers/user.thunk'
 import { UserInfo } from '../_constants/users.interface'
 import User from './User'
 import { AlertData } from '../_constants/alert.interface'
 import { LocationSettings } from '../_constants/settings.interface'
+import { alertSuccess } from '../_actions/alert.actions'
 
 type Props = {
     searchString: string,
     userList: UserData,
     alertState: AlertData,
     settings: settingsState,
-    callLoadUsers: (userCount: number, nationality: string) => {}
+    callLoadUsers: (userCount: number, nationality: string) => {},
+    callUpdateUsers: () => {},
+    showEndAlert: (message: string) => {}
 }
 const UserList = (props: Props) => {
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isPreloaded, setIsPreloaded] = useState(false)
     const [isFetching, setIsFetching] = useState(false)
-    const usersCount = 50
+    const [isInitialized, setIsInitialized] = useState(false)
 
-    // Load users at initializing
+    const usersCount = 50
+    const maxUsersCount = 1000
+
+    // Preload users
     useEffect(() => {
-        if(isLoaded || props.userList.users.length)
+        if(isPreloaded || props.userList.isPreloaded)
             return
         props.callLoadUsers(usersCount, props.settings.location.nationality)
-        setIsLoaded(true)
-    }, [props, isLoaded, usersCount])
+        setIsPreloaded(true)
+    }, [props, isPreloaded, usersCount])
 
-    // Load users with scrolling
+    // Initialize users at first load
+    useEffect(() => {
+        if(!props.userList.isPreloaded
+            || isInitialized
+            || props.userList.users.length)
+            return
+        props.callUpdateUsers()
+        setIsInitialized(true)
+        setIsPreloaded(false)
+    }, [props, isInitialized, usersCount])
+
+    // Add preloaded users to users list when scrolling
     useEffect(() => {
         if(!isFetching || props.searchString)
             return
-        props.callLoadUsers(usersCount, props.settings.location.nationality)
+        if(props.userList.users.length >= maxUsersCount) {
+            props.showEndAlert('--- The End ----')
+            return
+        }
+        props.callUpdateUsers()
         setIsFetching(false)
+        setIsPreloaded(false)
     }, [props, isFetching, usersCount])
 
     // Handle scroll
@@ -81,7 +103,8 @@ const UserList = (props: Props) => {
 }
 
 interface UserData {
-    users: UserInfo[]
+    users: UserInfo[],
+    isPreloaded: boolean
 }
 interface settingsState {
     location: LocationSettings
@@ -99,6 +122,8 @@ const mapStateToProps = (state: {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
     callLoadUsers: (userCount = 50, nationality="") => dispatch(loadUsers(userCount, nationality)),
+    callUpdateUsers: () => dispatch(updateUsers()),
+    showEndAlert: (message: string) => dispatch(alertSuccess(message)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList)
