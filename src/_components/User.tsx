@@ -15,11 +15,11 @@ const User = (props: Props) => {
     }
     return (
         <>
-            <Row xs={1} md={4} className="m-1 rounded border align-items-center p-1 user" onClick={handleClick}>
-                <Col><img src={props.data.picture.thumbnail} alt=""/></Col>
-                <Col><span>{ props.data.name.username }</span></Col>
-                <Col><span>{ props.data.name.first + ' ' + props.data.name.last }</span></Col>
-                <Col><span>{ props.data.email }</span></Col>
+            <Row className="m-1 rounded border align-items-center text-center p-1 user" onClick={handleClick}>
+                <Col xs={12} sm={2}><img src={props.data.picture.thumbnail} alt=""/></Col>
+                <Col xs={12} sm={2}><span>{ props.data.name.username }</span></Col>
+                <Col xs={12} sm={4}><span>{ props.data.name.first + ' ' + props.data.name.last }</span></Col>
+                <Col xs={12} sm={4}><span>{ props.data.email }</span></Col>
             </Row>
             <DetailsModal
                 show={showDetail}

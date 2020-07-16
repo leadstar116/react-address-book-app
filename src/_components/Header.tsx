@@ -1,20 +1,39 @@
 import React from 'react'
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, FormControl, InputGroup } from 'react-bootstrap'
 
-const Header = () => {
+type Props = {
+    searchString: string,
+    setSearchString: (name: string) => void
+}
+
+const Header = (props: Props) => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" fixed="top">
             <Navbar.Brand href="#home">Address Book</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto" defaultActiveKey="/">
-                    <Nav.Link eventKey="/">Home</Nav.Link>
-                    <Nav.Link eventKey="/settings">Settings</Nav.Link>
+                <Nav className="mr-auto">
+                    <Link className="mr-2" to="/">Home</Link>
+                    <Link to="/settings">Settings</Link>
                 </Nav>
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-success">Search</Button>
-                </Form>
+                <InputGroup className="mr-sm-2 search-input" >
+                    <InputGroup.Prepend>
+                        <InputGroup.Text className={props.searchString && "border border-danger"}>
+                            First and last name
+                        </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        type="text"
+                        placeholder="Search"
+                        className={props.searchString
+                            ? "mr-sm-2 border border-danger"
+                            : "mr-sm-2"
+                        }
+                        value={props.searchString}
+                        onChange={(e) => props.setSearchString(e.target.value)}
+                    />
+                </InputGroup>
             </Navbar.Collapse>
         </Navbar>
     )

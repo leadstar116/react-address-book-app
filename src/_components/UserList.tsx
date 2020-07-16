@@ -8,36 +8,58 @@ import User from './User'
 import { AlertData } from '../_constants/alert.interface'
 
 type Props = {
+    searchString: string,
     userList: UserData,
     alertState: AlertData,
     callLoadUsers: (userCount: number) => {}
 }
 const UserList = (props: Props) => {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isFetching, setIsFetching] = useState(false)
     const usersCount = 50
 
+    // Load users at initializing
     useEffect(() => {
-        if(isLoaded)
-            return;
+        if(isLoaded || props.userList.users.length)
+            return
         props.callLoadUsers(usersCount)
         setIsLoaded(true)
     }, [props, isLoaded, usersCount])
 
+    // Load users with scrolling
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const handleScroll = () => {
-        if ((window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight)
+        if(!isFetching || props.searchString)
             return
         props.callLoadUsers(usersCount)
+        setIsFetching(false)
+    }, [props, isFetching, usersCount])
+
+    // Handle scroll
+    function handleScroll() {
+        if ((window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight)
+            return
+        setIsFetching(true)
     }
+
+    // Setup scroll event
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    const filtereUsersWithSearchKey = () => {
+        return props.userList.users.filter((user) => {
+            const name = user.name.first + user.name.last as string
+            return name.toLowerCase().includes(props.searchString.toLowerCase())
+        })
+    }
+
+    const filteredUsers = filtereUsersWithSearchKey()
 
     return (
         <div className="p-2">
             {
-                props.userList.users.map((user, index) => (
+                filteredUsers.map((user, index) => (
                     <User data={user} key={index}/>
                 ))
             }
@@ -45,6 +67,12 @@ const UserList = (props: Props) => {
                 <div className={props.alertState.alertClass}>
                     {props.alertState.alertMessage}
                 </div>
+            }
+            {(!filteredUsers.length && props.userList.users.length)
+                ? (<div className="alert alert-danger text-center">
+                    Sorry, we couldn't find a user with that name
+                    </div>)
+                : ''
             }
         </div>
     )
@@ -64,7 +92,7 @@ const mapStateToProps = (state: {
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-    callLoadUsers: (userCount = 50) => dispatch(loadUsers(userCount))
+    callLoadUsers: (userCount = 50) => dispatch(loadUsers(userCount)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList)
