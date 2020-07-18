@@ -1,4 +1,4 @@
-import { LOAD_USERS_SUCCESSFULLY, CLEAR_USERS, UPDATE_USERS_WITH_PRELOADED_USERS, UPDATE_PRELOADED_FLAG } from "../_actions/users.actions";
+import { USER_LOADED_SUCCESSFULLY, CLEAR_USERS, UPDATE_USERS_WITH_PRELOADED_USERS, UPDATE_PRELOADED_FLAG } from "../_actions/users.actions";
 import { UserInfo } from "../_constants/users.interface"
 
 const usersState = {
@@ -10,7 +10,7 @@ const usersReducer = (state = usersState, action: any) => {
     const {type, payload} = action
 
     switch (type) {
-        case LOAD_USERS_SUCCESSFULLY:
+        case USER_LOADED_SUCCESSFULLY:
             return {
                 ...state,
                 preloadedUsers: payload.users.map((user: UserInfo) => ({
