@@ -50,7 +50,7 @@ const UserList = (props: Props) => {
         if(!isFetching || props.searchString)
             return
         if(props.userList.users.length >= maxUsersCount) {
-            props.showEndAlert('--- The End ----')
+            props.showEndAlert('End of users catalog')
             return
         }
         props.callUpdateUsers()

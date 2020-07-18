@@ -1,7 +1,8 @@
 import {
     ALERT_FAILURE,
     ALERT_SUCCESS,
-    ALERT_CLEAR, ALERT_LOADING
+    ALERT_CLEAR,
+    ALERT_LOADING
 } from '../_actions/alert.actions'
 import { AlertData } from '../_constants/alert.interface';
 

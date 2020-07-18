@@ -1,4 +1,4 @@
 export interface AlertData {
-    alertMessage: '',
-    alertClass: ''
+    alertMessage: string,
+    alertClass: string
 }
