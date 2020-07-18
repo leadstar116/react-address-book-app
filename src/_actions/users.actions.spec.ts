@@ -62,12 +62,25 @@ describe('load users successfully action test', () => {
 })
 
 describe('update preloaded users flag action test', () => {
-    it('should return new flag', () => {
-        const flag = true
-        const expectedAction = {
-            type: usersActions.UPDATE_PRELOADED_FLAG,
-            payload: { flag }
-        }
-        expect(usersActions.updatePreloadedFlag(flag)).toEqual(expectedAction)
+    describe('When flag is true', () => {
+        it('should return true', () => {
+            const flag = true
+            const expectedAction = {
+                type: usersActions.UPDATE_PRELOADED_FLAG,
+                payload: { flag }
+            }
+            expect(usersActions.updatePreloadedFlag(flag)).toEqual(expectedAction)
+        })
+    })
+
+    describe('When flag is false', () => {
+        it('should return false', () => {
+            const flag = false
+            const expectedAction = {
+                type: usersActions.UPDATE_PRELOADED_FLAG,
+                payload: { flag }
+            }
+            expect(usersActions.updatePreloadedFlag(flag)).toEqual(expectedAction)
+        })
     })
 })
