@@ -54,10 +54,10 @@ describe('load users successfully action test', () => {
             testUserInfo
         ] as UserInfo[]
         const expectedAction = {
-            type: usersActions.LOAD_USERS_SUCCESSFULLY,
+            type: usersActions.USER_LOADED_SUCCESSFULLY,
             payload: { users }
         }
-        expect(usersActions.loadUsersSuccessfully(users)).toEqual(expectedAction)
+        expect(usersActions.userLoadedSuccessfully(users)).toEqual(expectedAction)
     })
 })
 

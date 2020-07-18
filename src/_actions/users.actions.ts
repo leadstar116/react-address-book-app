@@ -1,8 +1,8 @@
 import { UserInfo } from "../_constants/users.interface"
 
-export const LOAD_USERS_SUCCESSFULLY = "LOAD_USERS_SUCCESSFULLY"
-export const loadUsersSuccessfully = (users: Array<UserInfo>) => ({
-    type: LOAD_USERS_SUCCESSFULLY,
+export const USER_LOADED_SUCCESSFULLY = "USER_LOADED_SUCCESSFULLY"
+export const userLoadedSuccessfully = (users: Array<UserInfo>) => ({
+    type: USER_LOADED_SUCCESSFULLY,
     payload: { users }
 })
 

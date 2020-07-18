@@ -56,7 +56,7 @@ describe('users reducer test', () => {
         }
     } as UserInfo
 
-    test('LOAD_USERS_SUCCESSFULLY: should set loaded users to preloaded users and isPreloaded to true', () => {
+    test('USER_LOADED_SUCCESSFULLY: should set loaded users to preloaded users and isPreloaded to true', () => {
         const users = [ testUserInfo ]
         const expectedState = {
             users: [],
@@ -64,7 +64,7 @@ describe('users reducer test', () => {
             isPreloaded: true
         }
         const action = {
-            type: usersActions.LOAD_USERS_SUCCESSFULLY,
+            type: usersActions.USER_LOADED_SUCCESSFULLY,
             payload: { users }
         }
         const newState = usersReducer(initialState, action)
