@@ -2,7 +2,7 @@ import * as alertActions from '../_actions/alert.actions'
 import { AlertData } from '../_constants/alert.interface'
 import alertReducer from './alert.reducer'
 
-describe('success alert reducer', () => {
+describe('alert reducer test', () => {
     const initialState = {
         alertClass: '',
         alertMessage: ''
