@@ -48,7 +48,8 @@
     "dev": "webpack-dev-server --mode development --open --hot",
     "bundle": "webpack",
     "build": "webpack --mode development",
-    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive"
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -66,6 +67,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.10.5"
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "jest": "^26.1.0",
+    "react-test-renderer": "^16.13.1"
   }
 }
