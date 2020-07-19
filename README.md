@@ -42,7 +42,7 @@ Possible choices should be: CH, ES, FR, GB.
 
 ## Screenshots
 You can check video here: https://www.screencast.com/t/mq55Elc3u
-
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.screencast.com/t/mq55Elc3u)
 
 # Project Run
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
