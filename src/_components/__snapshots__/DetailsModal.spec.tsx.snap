@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Details Component should render with given props 1`] = `null`;
+
+exports[`Header Component should render with given props 1`] = `null`;
