@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserList Component should render with given props 1`] = `
+<div
+  className="p-2"
+>
+  <div
+    className="m-1 rounded border align-items-center text-center p-1 user row"
+    onClick={[Function]}
+  >
+    <div
+      className="col-sm-2 col-12"
+    >
+      <img
+        alt=""
+        src="https://randomuser.me/api/portraits/thumb/men/75.jpg"
+      />
+    </div>
+    <div
+      className="col-sm-2 col-12"
+    >
+      <span>
+        test
+      </span>
+    </div>
+    <div
+      className="col-sm-2 col-12"
+    >
+      <span>
+        CH
+      </span>
+    </div>
+    <div
+      className="col-sm-2 col-12"
+    >
+      <span>
+        James Bond
+      </span>
+    </div>
+    <div
+      className="col-sm-4 col-12"
+    >
+      <span>
+        test@test.com
+      </span>
+    </div>
+  </div>
+  
+</div>
+`;

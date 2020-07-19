@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component should render with given props 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+>
+  <a
+    className="navbar-brand"
+    href="#home"
+  >
+    Address Book
+  </a>
+  <button
+    aria-controls="basic-navbar-nav"
+    aria-label="Toggle navigation"
+    className="navbar-toggler collapsed"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    aria-expanded={null}
+    className="navbar-collapse collapse"
+    id="basic-navbar-nav"
+  >
+    <div
+      className="mr-auto navbar-nav"
+      onKeyDown={[Function]}
+    >
+      <a
+        className="mr-2"
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+      <a
+        href="/settings"
+        onClick={[Function]}
+      >
+        Settings
+      </a>
+    </div>
+  </div>
+</nav>
+`;

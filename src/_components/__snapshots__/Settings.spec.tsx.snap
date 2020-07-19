@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings Component should render with given state from Redux store 1`] = `
+<div
+  className="p-2"
+>
+  <h2
+    className="text-center"
+  >
+    Settings
+  </h2>
+  <div
+    className="settings-container"
+  >
+    <div
+      className="text-center row"
+    >
+      <div
+        className="col-sm-3 col-12"
+      >
+        Nationality: 
+      </div>
+      <div
+        className="col-sm-9 col-12"
+      >
+        <select
+          className="nationality-select"
+          id="nationality"
+          name="nationality"
+          onChange={[Function]}
+          value=""
+        >
+          <option
+            value="Any"
+          >
+            Any
+          </option>
+          <option
+            value="CH"
+          >
+            CH
+          </option>
+          <option
+            value="ES"
+          >
+            ES
+          </option>
+          <option
+            value="FR"
+          >
+            FR
+          </option>
+          <option
+            value="GB"
+          >
+            GB
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;
