@@ -1,9 +1,9 @@
-## React Address Book App
+# React Address Book App
 This is a fictional address book app, where you can search for users addresses and personal information. The app would display a list of users for the end user to browse and get personal information for a selected user, where you can also select via a settings page which nationalities you’re interested in.
 Pull users information for the Users API
 - please read the documentation on the https://randomuser.me, and get users data from there.
 
-# Used Stacks:
+## Used Stacks:
 - React
 - Redux
 - Redux Thunk
@@ -40,6 +40,9 @@ Possible choices should be: CH, ES, FR, GB.
 - When setting a new nationality, it would not cause the reloading of the page.
 
 
+## Screenshots
+https://www.screencast.com/t/mq55Elc3u
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -47,10 +50,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn dev`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
