@@ -17,7 +17,7 @@ export const loadUsers = (userCount = 50, nationality = "") => async (dispatch: 
         dispatch(userLoadedSuccessfully(result.results))
         dispatch(alertClear())
     } catch(e) {
-        dispatch(alertFailure(e))
+        dispatch(alertFailure(e.toString()))
     }
 }
 
@@ -27,6 +27,6 @@ export const updateUsers = () => async (dispatch: MyThunkDispatch) => {
         dispatch(updateUsersWithPreloadedUsers())
         dispatch(alertClear())
     } catch(e) {
-        dispatch(alertFailure(e))
+        dispatch(alertFailure(e.toString()))
     }
 }

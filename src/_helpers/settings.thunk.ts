@@ -15,6 +15,6 @@ export const updateNationality = (nationality = "") => async (dispatch: MyThunkD
         dispatch(clearUsers())
         dispatch(loadUsers(50, nationality))
     } catch(e) {
-        dispatch(alertFailure(e))
+        dispatch(alertFailure(e.toString()))
     }
 }
