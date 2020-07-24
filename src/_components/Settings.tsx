@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initialState } from '../_constants/state.interface'
 import { updateNationality } from '../_helpers/settings.thunk'
 
@@ -35,4 +35,4 @@ const Settings = () => {
     )
 }
 
-export default connect()(Settings)
+export default Settings

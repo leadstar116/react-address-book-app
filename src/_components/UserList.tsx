@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loadUsers, updateUsers } from '../_helpers/user.thunk'
 import { alertSuccess } from '../_actions/alert.actions'
 import User from './User'
@@ -96,4 +96,4 @@ const UserList = ({ searchString }: Props) => {
     )
 }
 
-export default connect()(UserList)
+export default UserList
