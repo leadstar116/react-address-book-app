@@ -18,8 +18,16 @@ type Props = {
     callUpdateUsers: () => {},
     showEndAlert: (message: string) => {}
 }
-const UserList = (props: Props) => {
-    const [isPreloaded, setIsPreloaded] = useState(false)
+const UserList = ({
+        userList,
+        callLoadUsers,
+        settings,
+        callUpdateUsers,
+        showEndAlert,
+        searchString,
+        ...props
+    }: Props) => {
+
     const [isFetching, setIsFetching] = useState(false)
     const [isInitialized, setIsInitialized] = useState(false)
 
@@ -28,35 +36,32 @@ const UserList = (props: Props) => {
 
     // Preload users
     useEffect(() => {
-        if(isPreloaded || props.userList.isPreloaded)
+        if(userList.isPreloaded)
             return
-        props.callLoadUsers(usersCount, props.settings.location.nationality)
-        setIsPreloaded(true)
-    }, [props, isPreloaded, usersCount])
+        callLoadUsers(usersCount, settings.location.nationality)
+    }, [callLoadUsers, userList, settings, usersCount])
 
     // Initialize users at first load
     useEffect(() => {
-        if(!props.userList.isPreloaded
+        if(!userList.isPreloaded
             || isInitialized
-            || props.userList.users.length)
+            || userList.users.length)
             return
-        props.callUpdateUsers()
+        callUpdateUsers()
         setIsInitialized(true)
-        setIsPreloaded(false)
-    }, [props, isInitialized, usersCount])
+    }, [userList, callUpdateUsers, isInitialized, usersCount])
 
     // Add preloaded users to users list when scrolling
     useEffect(() => {
-        if(!isFetching || props.searchString)
+        if(!isFetching || searchString)
             return
-        if(props.userList.users.length >= maxUsersCount) {
-            props.showEndAlert('End of users catalog')
+        if(userList.users.length >= maxUsersCount) {
+            showEndAlert('End of users catalog')
             return
         }
-        props.callUpdateUsers()
+        callUpdateUsers()
         setIsFetching(false)
-        setIsPreloaded(false)
-    }, [props, isFetching, usersCount])
+    }, [userList, callUpdateUsers, showEndAlert, isFetching, searchString])
 
     // Handle scroll
     function handleScroll() {
@@ -72,10 +77,10 @@ const UserList = (props: Props) => {
     }, [])
 
     const filtereUsersWithSearchKey = () => {
-        return props.userList.users.filter((user) => {
+        return userList.users.filter((user) => {
             const name = user.name.first + user.name.last as string
             return name.split(' ').join('').toLowerCase().includes(
-                props.searchString.split(' ').join('').toLowerCase()
+                searchString.split(' ').join('').toLowerCase()
             )
         })
     }
@@ -94,7 +99,7 @@ const UserList = (props: Props) => {
                     {props.alertState.alertMessage}
                 </div>
             }
-            {(!filteredUsers.length && props.userList.users.length)
+            {(!filteredUsers.length && userList.users.length)
                 ? (<div className="alert alert-danger text-center">
                     Sorry, we couldn't find a user with that name
                     </div>)
