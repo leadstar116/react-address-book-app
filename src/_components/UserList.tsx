@@ -86,7 +86,6 @@ const UserList = ({
     }
 
     const filteredUsers = filtereUsersWithSearchKey()
-    console.log(filteredUsers)
 
     return (
         <div className="p-2">
