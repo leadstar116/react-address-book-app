@@ -51,8 +51,8 @@
     "dev": "webpack-dev-server --mode development --open --hot",
     "bundle": "webpack",
     "build": "webpack --mode development",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test": "jest -u",
+    "test:watch": "npm test -- -u --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
