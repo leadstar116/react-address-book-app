@@ -74,7 +74,9 @@ const UserList = (props: Props) => {
     const filtereUsersWithSearchKey = () => {
         return props.userList.users.filter((user) => {
             const name = user.name.first + user.name.last as string
-            return name.toLowerCase().includes(props.searchString.toLowerCase())
+            return name.split(' ').join('').toLowerCase().includes(
+                props.searchString.split(' ').join('').toLowerCase()
+            )
         })
     }
 
