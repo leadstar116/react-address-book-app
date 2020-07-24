@@ -1,3 +1,7 @@
+export interface SettingsState {
+    location: LocationSettings
+}
+
 export interface LocationSettings {
     nationality: LocationEnum
 }

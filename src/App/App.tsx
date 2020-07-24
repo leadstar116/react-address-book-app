@@ -5,6 +5,7 @@ import { history } from '../_helpers/history'
 import { alertClear } from '../_actions/alert.actions'
 import { useDispatch } from 'react-redux'
 import SettingsPage from '../SettingsPage/SettingsPage'
+import Page404 from '../Page404/Page404'
 
 function App() {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ function App() {
             <Switch>
               <Route exact path='/' component={ HomePage } />
               <Route exact path='/settings' component={ SettingsPage } />
+              <Route component={ Page404 } />
             </Switch>
           </Router>
         </div>

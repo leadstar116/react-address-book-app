@@ -1,3 +1,8 @@
+export interface UserState {
+    users: UserInfo[],
+    preloadedUsers: UserInfo[],
+    isPreloaded: boolean
+}
 export interface UserInfo {
     email: string,
     name: UserName,

@@ -1,18 +1,18 @@
 import * as alertActions from '../_actions/alert.actions'
-import { AlertData } from '../_constants/alert.interface'
+import { AlertState } from '../_constants/alert.interface'
 import alertReducer from './alert.reducer'
 
 describe('alert reducer test', () => {
     const initialState = {
         alertClass: '',
         alertMessage: ''
-    } as AlertData
+    } as AlertState
 
     test('should update with success class and message', () => {
         const expectedState = {
             alertClass: 'alert alert-success text-center',
             alertMessage: 'Success'
-        } as AlertData
+        } as AlertState
         const message = 'Success'
         const action = {
             type: alertActions.ALERT_SUCCESS,
@@ -27,7 +27,7 @@ describe('alert reducer test', () => {
         const expectedState = {
             alertClass: 'alert alert-danger text-center',
             alertMessage: 'Failed'
-        } as AlertData
+        } as AlertState
         const message = 'Failed'
         const action = {
             type: alertActions.ALERT_FAILURE,
@@ -42,7 +42,7 @@ describe('alert reducer test', () => {
         const expectedState = {
             alertClass: 'alert alert-info text-center',
             alertMessage: 'Loading'
-        } as AlertData
+        } as AlertState
         const message = 'Loading'
         const action = {
             type: alertActions.ALERT_LOADING,
@@ -57,7 +57,7 @@ describe('alert reducer test', () => {
         const expectedState = {
             alertClass: '',
             alertMessage: ''
-        } as AlertData
+        } as AlertState
         const message = ''
         const action = {
             type: alertActions.ALERT_CLEAR,
