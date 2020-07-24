@@ -4,9 +4,9 @@ import {
     ALERT_CLEAR,
     ALERT_LOADING
 } from '../_actions/alert.actions'
-import { AlertData } from '../_constants/alert.interface';
+import { AlertState } from '../_constants/alert.interface';
 
-const alertState: AlertData = {
+const alertState: AlertState = {
     alertClass: '',
     alertMessage: ''
 }

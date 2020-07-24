@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { loadUsers, updateUsers } from '../_helpers/user.thunk'
-import { UserInfo } from '../_constants/users.interface'
-import User from './User'
-import { AlertData } from '../_constants/alert.interface'
-import { LocationSettings } from '../_constants/settings.interface'
 import { alertSuccess } from '../_actions/alert.actions'
+import User from './User'
+import { initialState } from '../_constants/state.interface'
 
 type Props = {
     searchString: string,
-    userList: UserData,
-    alertState: AlertData,
-    settings: settingsState,
-    callLoadUsers: (userCount: number, nationality: string) => {},
-    callUpdateUsers: () => {},
-    showEndAlert: (message: string) => {}
 }
-const UserList = ({
-        userList,
-        callLoadUsers,
-        settings,
-        callUpdateUsers,
-        showEndAlert,
-        searchString,
-        ...props
-    }: Props) => {
+
+const UserList = ({ searchString }: Props) => {
+    const dispatch = useDispatch()
+    const userList = useSelector((state:initialState) => state.usersReducer)
+    const alertState = useSelector((state:initialState) => state.alertReducer)
+    const settings = useSelector((state:initialState) => state.settingsReducer)
 
     const [isFetching, setIsFetching] = useState(false)
     const [isInitialized, setIsInitialized] = useState(false)
@@ -38,8 +25,8 @@ const UserList = ({
     useEffect(() => {
         if(userList.isPreloaded)
             return
-        callLoadUsers(usersCount, settings.location.nationality)
-    }, [callLoadUsers, userList, settings, usersCount])
+        dispatch(loadUsers(usersCount, settings.location.nationality))
+    }, [dispatch, userList, settings, usersCount])
 
     // Initialize users at first load
     useEffect(() => {
@@ -47,21 +34,21 @@ const UserList = ({
             || isInitialized
             || userList.users.length)
             return
-        callUpdateUsers()
+        dispatch(updateUsers())
         setIsInitialized(true)
-    }, [userList, callUpdateUsers, isInitialized, usersCount])
+    }, [userList, dispatch, isInitialized, usersCount])
 
     // Add preloaded users to users list when scrolling
     useEffect(() => {
         if(!isFetching || searchString)
             return
         if(userList.users.length >= maxUsersCount) {
-            showEndAlert('End of users catalog')
+            dispatch(alertSuccess('End of users catalog'))
             return
         }
-        callUpdateUsers()
+        dispatch(updateUsers())
         setIsFetching(false)
-    }, [userList, callUpdateUsers, showEndAlert, isFetching, searchString])
+    }, [userList, dispatch, isFetching, searchString])
 
     // Handle scroll
     function handleScroll() {
@@ -94,9 +81,9 @@ const UserList = ({
                     <User data={user} key={index}/>
                 ))
             }
-            {props.alertState !== undefined &&
-                <div className={props.alertState.alertClass}>
-                    {props.alertState.alertMessage}
+            {alertState !== undefined &&
+                <div className={alertState.alertClass}>
+                    {alertState.alertMessage}
                 </div>
             }
             {(!filteredUsers.length && userList.users.length)
@@ -109,28 +96,4 @@ const UserList = ({
     )
 }
 
-interface UserData {
-    users: UserInfo[],
-    isPreloaded: boolean
-}
-interface settingsState {
-    location: LocationSettings
-}
-
-const mapStateToProps = (state: {
-        usersReducer: UserData,
-        alertReducer: AlertData,
-        settingsReducer: settingsState,
-    }) => ({
-    userList: state.usersReducer,
-    settings: state.settingsReducer,
-    alertState: state.alertReducer
-})
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-    callLoadUsers: (userCount = 50, nationality="") => dispatch(loadUsers(userCount, nationality)),
-    callUpdateUsers: () => dispatch(updateUsers()),
-    showEndAlert: (message: string) => dispatch(alertSuccess(message)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserList)
+export default connect()(UserList)
